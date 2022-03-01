@@ -1,14 +1,71 @@
-# Autograding Example: Java
-This example project is written in Java, and tested with Gradle/JUnit.
+# 課題 2-3
+条件分岐
 
-### The assignment
-The tests are currently failing because of an output mismatch. Fixing the `System.out.println` in the main method will make the tests green.
+### 課題の説明
+下の表と注意事項は旭山動物園の入園料の抜粋である。
+次ページに示す参考コードと5通りの実行結果をもとにして、動物園券売所窓口で入園券を購入する場合に、
+表の区分と注意事項に書かれた証書等の有無を入力すると一人分料金を表示プログラムコードを作成しなさい。
 
-### Setup command
-N/A
+| 区分         | 通常料金   | 　市民特別料金　 |
+|------------|--------|----------|
+| 大人（高校生以上）  | 1,000円 | 700円     |
+| 小人（中学生以下）  | 無料     | 無料       |
+| 動物園パスポート | 1,400円 | 1,400円   |
 
-### Run command
-`gradle test`
+ただし、キーボードからの入出力は下記のように行うこと。
+```java
+java.util.Scanner sc = new java.util.Scanner(System.in); // 最初の1回だけ書く
+input = sc.nextInt(); //　キーボードから入力を受ける
+input = sc.nextLine(); // 文字列を受け付ける場合はnextLine()を使う
 
-### Notes
-- The JDK is installed on GitHub Actions machines, so you're also able to directly invoke `javac`, `java`, or any other CLI command included in the JDK. 
+```
+- プログラムの枠組み
+```java
+public class Prog23 {
+
+	public static void main(String[] args) {
+		int input;
+        java.util.Scanner sc = new java.util.Scanner(System.in);
+		
+		System.out.println("料金：１）大人（高校生以上）、２）小人（中学生以下）、３）動物園パスポート");
+		System.out.println("区分を入力してください：");
+		input = sc.nextInt(); // 整数のキーボード入力を受け付ける
+        sc.nextLine(); // 改行が残るので捨てる
+		// ここからプログラムを追加する
+	}
+
+}
+```
+
+- 実行結果1
+```
+料金：１）大人（高校生以上）、２）小人（中学生以下）、３）動物園パスポート
+区分を入力してください：1
+旭川市在住者であることがわかる証書がありますか？　１）はい、２）いいえ)：1
+700円です。
+```
+- 実行結果2
+```
+料金：１）大人（高校生以上）、２）小人（中学生以下）、３）動物園パスポート
+区分を入力してください：1
+旭川市在住者であることがわかる証書がありますか？　１）はい、２）いいえ)：2
+1,000円です。
+```
+- 実行結果3
+```
+料金：１）大人（高校生以上）、２）小人（中学生以下）、３）動物園パスポート
+区分を入力してください：2
+無料です。
+```
+- 実行結果4
+```
+料金：１）大人（高校生以上）、２）小人（中学生以下）、３）動物園パスポート
+区分を入力してください：3
+1,400円です。
+```
+- 実行結果5
+```
+料金：１）大人（高校生以上）、２）小人（中学生以下）、３）動物園パスポート
+区分を入力してください：0
+区分の入力が正しくありません
+```
