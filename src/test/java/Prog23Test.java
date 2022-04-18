@@ -21,7 +21,7 @@ public class Prog23Test {
         Prog23.main(null);
 
         // assertion
-        String[] prints = bos.toString().split("\n");
+        String[] prints = bos.toString().split(System.lineSeparator());
         assertTrue(prints[prints.length - 1].contains("700円です"));
 
         // undo the binding in System
@@ -44,7 +44,7 @@ public class Prog23Test {
         Prog23.main(null);
 
         // assertion
-        String[] prints = bos.toString().split("\n");
+        String[] prints = bos.toString().split(System.lineSeparator());
         assertTrue(prints[prints.length - 1].contains("1,000円です"));
 
         // undo the binding in System
@@ -66,7 +66,7 @@ public class Prog23Test {
         Prog23.main(null);
 
         // assertion
-        String[] prints = bos.toString().split("\n");
+        String[] prints = bos.toString().split(System.lineSeparator());
         assertTrue(prints[prints.length - 1].contains("無料です"));
 
         // undo the binding in System
@@ -88,7 +88,7 @@ public class Prog23Test {
         Prog23.main(null);
 
         // assertion
-        String[] prints = bos.toString().split("\n");
+        String[] prints = bos.toString().split(System.lineSeparator());
         assertTrue(prints[prints.length - 1].contains("1,400円です"));
 
         // undo the binding in System
@@ -110,7 +110,7 @@ public class Prog23Test {
         Prog23.main(null);
 
         // assertion
-        String[] prints = bos.toString().split("\n");
+        String[] prints = bos.toString().split(System.lineSeparator());
         assertTrue(prints[prints.length - 1].contains("区分の入力が正しくありません"));
 
         // undo the binding in System
