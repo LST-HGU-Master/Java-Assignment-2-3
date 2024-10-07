@@ -16,8 +16,9 @@
 java.util.Scanner sc = new java.util.Scanner(System.in); // 最初の1回だけ書く
 input = sc.nextInt(); //　キーボードから入力を受ける
 input = sc.nextLine(); // 文字列を受け付ける場合はnextLine()を使う
-
 ```
+```👉 new java.util.Scanner(System.in)を2回書くと採点システムがエラーになるので注意してください！！！ ```
+
 ### プログラムの雛形
 ```java
 public class Prog23 { 
