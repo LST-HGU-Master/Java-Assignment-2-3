@@ -1,0 +1,82 @@
+name: Autograding Tests
+'on':
+- push
+- repository_dispatch
+permissions:
+  checks: write
+  actions: read
+  contents: read
+jobs:
+  run-autograding-tests:
+    runs-on: ubuntu-latest
+    if: github.actor != 'github-classroom[bot]'
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    - name: Set up JDK 21
+      uses: actions/setup-java@v4
+      with:
+        java-version: '21'
+        distribution: 'temurin'
+    - name: Setup Gradle
+      uses: gradle/actions/setup-gradle@af1da67850ed9a4cedd57bfd976089dd991e2582 # v4.0.0
+    - name: Test Adult with Cert
+      id: test-adult-with-cert
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Test Adult with Cert
+        setup-command: ''
+        command: 'sudo locale-gen ja_JP.UTF-8 && export LANG=ja_JP.UTF-8 && sudo update-locale
+          && gradle test --tests "Prog23Test.testAdultWithCert" '
+        timeout: 10
+        max-score: 3
+    - name: Test Adult without Cert
+      id: test-adult-without-cert
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Test Adult without Cert
+        setup-command: ''
+        command: 'sudo locale-gen ja_JP.UTF-8 && export LANG=ja_JP.UTF-8 && sudo update-locale
+          && gradle test --tests "Prog23Test.testAdultWithoutCert" '
+        timeout: 10
+        max-score: 3
+    - name: Test Child
+      id: test-child
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Test Child
+        setup-command: ''
+        command: 'sudo locale-gen ja_JP.UTF-8 && export LANG=ja_JP.UTF-8 && sudo update-locale
+          && gradle test --tests "Prog23Test.testChild" '
+        timeout: 10
+        max-score: 2
+    - name: Test Passport
+      id: test-passport
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Test Passport
+        setup-command: ''
+        command: 'sudo locale-gen ja_JP.UTF-8 && export LANG=ja_JP.UTF-8 && sudo update-locale
+          && gradle test --tests "Prog23Test.testPassport" '
+        timeout: 10
+        max-score: 2
+    - name: Test Invalid Input
+      id: test-invalid-input
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Test Invalid Input
+        setup-command: ''
+        command: 'sudo locale-gen ja_JP.UTF-8 && export LANG=ja_JP.UTF-8 && sudo update-locale
+          && gradle test --tests "Prog23Test.testInvalidInput" '
+        timeout: 10
+        max-score: 3
+    - name: Autograding Reporter
+      uses: classroom-resources/autograding-grading-reporter@v1
+      env:
+        TEST-ADULT-WITH-CERT_RESULTS: "${{steps.test-adult-with-cert.outputs.result}}"
+        TEST-ADULT-WITHOUT-CERT_RESULTS: "${{steps.test-adult-without-cert.outputs.result}}"
+        TEST-CHILD_RESULTS: "${{steps.test-child.outputs.result}}"
+        TEST-PASSPORT_RESULTS: "${{steps.test-passport.outputs.result}}"
+        TEST-INVALID-INPUT_RESULTS: "${{steps.test-invalid-input.outputs.result}}"
+      with:
+        runners: test-adult-with-cert,test-adult-without-cert,test-child,test-passport,test-invalid-input
